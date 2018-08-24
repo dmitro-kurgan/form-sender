@@ -1,0 +1,24 @@
+@mixin font-face($style-name, $file, $family, $category:"") {
+    $filepath: "../fonts/" + $file;
+    @font-face {
+        font-family: "#{$style-name}";
+        src: url($filepath + ".eot")format('embedded-opentype'), url($filepath + ".woff") format('woff'), url($filepath + ".ttf")  format('truetype');
+    }
+    %#{$style-name} {
+        font: {
+            @if $category != "" {
+                family: "#{$style-name}", #{$category};
+            }
+            @else {
+                family: "#{$style-name}";
+                weight: normal;
+                weight: normal;
+            }
+        }
+    }
+}
+@include font-face('NeoSansPro-Bold', 'NeoSansPro-Bold', 'NeoSansPro', 'serif');
+@include font-face('PT_Sans-Web-Bold', 'PT_Sans-Web-Bold', 'PT_Sans-Web', 'serif');
+@include font-face('PT_Sans-Web-Regular', 'PT_Sans-Web-Regular', 'PT_Sans-Web', 'serif');
+@include font-face('FjallaOne-Regular', 'FjallaOne-RegularBold', 'FjallaOne', 'serif');
+@include font-face('Lato-Regular', 'Lato-Regular', 'Lato', 'serif');

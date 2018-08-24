@@ -1,0 +1,124 @@
+@import 'reset';
+@import 'fonts';
+$main_color: #fff;
+$main_font-size: 24px;
+$main_letter-spacing: 0.10em;
+$main_font-family: NeoSansPro-Bold, Arial, sans-serif;
+$main_font-family2: PT_Sans-Web-Bold, Arial, sans-serif;
+$main_font-family3: Lato-Regular, Arial, sans-serif;
+$main_font-family4: FjallaOne-Regular, Arial, sans-serif;
+$main_font-family5: PT_Sans-Web-Regular, Arial, sans-serif;
+.add-margin {
+	margin-top: 50px !important;
+}
+.no-margin {
+	margin: 0 !important;
+}
+body {
+	min-width: 320px;
+}
+header {
+	position: relative;
+	.header {
+		background: #000;
+		height: 100px;
+		.logo {
+			font: $main_font-size+8 $main_font-family;
+			color: $main_color;
+			line-height: 100px;
+		}
+		.bin {
+			float: right;
+			font: $main_font-size/2+6 $main_font-family;
+			color: #000;
+			background: $main_color;
+			padding: 10px 15px;
+			margin: 28px 0 0 0;
+			position: relative;
+			outline: none;
+		}
+		.bin-info {
+			position: absolute;
+		    display: none;
+		    padding: 25px;
+		    border: 1px solid #000;
+		    right: 0;
+		    z-index: 99;
+		    top: 100px;		
+		}
+	}
+}
+.content {
+	padding: 50px 0 0 0;
+	text-align: center;
+	.product-block {
+		text-align: center;
+		margin: 50px 0;
+		img {
+			width: 100%;
+		}
+		.product-block__text {
+			padding: 50px 0 10px 0;
+			.product-name{
+				float: left;
+				font: $main_font-size/2+6 $main_font-family;
+				color: #000;
+			}
+			.product-price {
+				float: right;
+				font: $main_font-size/2+6 $main_font-family;
+				color: #000;
+			}
+		}	
+		.add-to {
+			font: $main_font-size/2+6 $main_font-family;
+			color: $main_color;
+			background: #000;
+			padding: 5px 10px;
+		}
+	}
+	.more {
+		font: $main_font-size/2+6 $main_font-family;
+		color: $main_color;
+		background: #000s;
+		padding: 10px 15px;
+		margin: 28px 0 0 0;
+	}
+}
+
+
+
+
+
+
+
+// ---------TABS-----------
+#exTab1 .tab-content {
+  padding : 5px 15px;
+}
+
+#exTab2 h3 {
+  color : white;
+  background-color: #428bca;
+  padding : 5px 15px;
+}
+
+/* remove border radius for the tab */
+
+#exTab1 .nav-pills > li > a {
+    padding: 5px 10px;
+    border: 2px solid #000;
+    border-radius: 5px;
+}
+
+/* change border radius for the tab , apply corners on top*/
+
+#exTab3 .nav-pills > li > a {
+  border-radius: 4px 4px 0 0 ;
+}
+
+#exTab3 .tab-content {
+  color : white;
+  background-color: #428bca;
+  padding : 5px 15px;
+}

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/bootstrap.css" >
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<link rel="stylesheet" href="libs/jquery.form-sender/css/intlTelInput.css" type="text/css">
+</head>
+<body>
+<div class="container">
+  <h2>Modal Example</h2>
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#order-popup">Open Modal</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="order-popup" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        <form id="order-form" data-title="Order on the site" data-order-form>
+		    <input type="text" name="name" placeholder="Name" data-title="Name" data-is-included="true" required><br>
+		    <input type="tel" name="phone" placeholder="Phone number" data-title="Phone number" data-is-included="true" required><br>
+		    <textarea name="message" placeholder="Input your message here" data-title="Additional text" data-is-included="true" required></textarea><br>
+		    <button type="submit">Send the form</button>
+		</form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+<!-- ========================POPUP-THANKS-ORDER======================= -->
+<div id="order-thanks-popup" class="modal fade" role="dialog">
+	<div class="modal-dialog comment-modal">
+	    <div class="modal-content">
+			<div class="modal-header">
+				<h2>Заявка отправлена!</h2>
+			</div>
+			<div class="modal-body">
+				Заявка успешно отправлена. Наш менеджер свяжется с Вами для завершения заказа.
+			</div>
+	    </div>
+	</div>
+</div>
+<!-- ================================================================= -->
+<script src="js/jquery1.12.4.jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="libs/jquery.form-sender/jquery.form-sender.js"></script>
+<script src="libs/jquery.form-sender/intlTelInput.js"></script>
+<script>
+	$("input[name=phone]").intlTelInput({
+	   initialCountry: "ua",
+	   nationalMode: false,
+	   formatOnDisplay: true,
+	   utilsScript: "libs/jquery.form-sender/utils.js",
+	   preferredCountries: ['ua', 'ru', 'by'],
+	});
+
+	var _emailStyle = {
+		header: {
+			background_color: "f3f3f3",
+			color: "3579eb"
+		},
+		body: {
+			background_color: "f3f3f3",
+			color: "000000"
+		},
+		footer: {
+			background_color: "f3f3f3",
+			color: "3579eb"
+		}
+	};
+
+	FormSender.initSettings({
+		dir: "libs/jquery.form-sender/",
+		clearFields: false
+	});
+
+	var loading = function() {
+		$("#order-thanks-popup .modal-header h2").html("Обработка");
+		$("#order-thanks-popup .modal-body").html("<object data=\"/images/loader.svg\" class=\"loader\" type=\"image/svg+xml\" id=\"svg1\"></object>");
+		$('#order-thanks-popup').modal("show");
+	}
+
+	FormSender.registerForm({
+		id: "order-form",
+		emailStyle: _emailStyle,
+		onSuccess: function(json) {
+			$('#order-popup').modal("hide");
+			$("#order-thanks-popup .modal-header h2").html("Заявка отправлена");
+			$("#order-thanks-popup .modal-body").html("Заявка успешно отправлена. Наш менеджер свяжется с Вами для завершения заказа.");
+		},
+		onError: function(json) {
+			$("#order-thanks-popup .modal-header h2").html("Ошибка");
+			$("#order-thanks-popup .modal-body").html("Произошла ошибка при отправке заявки. Пожалуйста, попробуйте отправить заявку еще раз.");
+		},
+		onWait: function() {
+			loading();
+		}
+	});
+	$('input[name=phone]').keyup(function() {
+		if ($(this).intlTelInput("isValidNumber")) {
+			$(this).removeClass("input-invalid");
+			$(this).addClass("input-valid");
+		} else {
+			$(this).removeClass("input-valid");
+			$(this).addClass("input-invalid");
+		}
+	});
+</script>
+</body>
+
+</html>
